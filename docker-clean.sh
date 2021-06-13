@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
@@ -11,17 +11,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-source ~/.zshrc
-
-DOCKER_CONTAINERS	=		$(shell docker ps -a -q)
-DOCKER_VOLUMES		=		$(shell docker volume ls -q)
-
-ifneq ($(strip $(DOCKER_CONTAINERS)),)
-	@docker rm $(DOCKER_CONTAINERS) -f
-endif
-
-ifneq ($(strip $(DOCKER_VOLUMES)),)
-	docker volume rm $(DOCKER_VOLUMES)
-endif
-
+docker stop $(docker ps -a -q)
+docker rm $(docker ps -a -q)
+docker rmi $(docker images -a -q)
 docker system prune -a -f
