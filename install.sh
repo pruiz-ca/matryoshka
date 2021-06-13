@@ -14,7 +14,7 @@
 INSTALL_PATH=${INSTALL_PATH:-~/.valgrind}
 REPO=${REPO:-pruiz-ca/Valgrind42}
 REMOTE=${REMOTE:-https://github.com/${REPO}.git}
-BRANCH=${BRANCH:-master}
+BRANCH=${BRANCH:-main}
 
 command_exists() {
 command -v "$@" >/dev/null 2>&1
