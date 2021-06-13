@@ -21,7 +21,7 @@ command -v "$@" >/dev/null 2>&1
 }
 
 append_aliases(){
-LINE="alias valgrind='~/.valgrind/valgrind-docker.sh'"
+LINE="alias valgrind='~/.valgrind/docker-valgrind.sh'"
 grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
 
 LINE="alias dockerclean='~/.valgrind/docker-clean.sh'"
