@@ -21,17 +21,14 @@ command -v "$@" >/dev/null 2>&1
 }
 
 append_aliases(){
-LINE='alias valgrind="~/.valgrind/docker-valgrind.sh"'
-FILE='~/.zshrc'
-grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+LINE="alias valgrind='~/.valgrind/valgrind-docker.sh'"
+grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
 
-LINE='alias dockerclean="~/.valgrind/docker-clean.sh"'
-FILE='~/.zshrc'
-grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+LINE="alias dockerclean='~/.valgrind/docker-clean.sh'"
+grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
 }
 
 setup_color() {
-# Only use colors if connected to a terminal
 if [ -t 1 ]; then
 RED=$(printf '\033[31m')
 GREEN=$(printf '\033[32m')
