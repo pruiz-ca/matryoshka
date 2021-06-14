@@ -1,4 +1,4 @@
-# Matryoshka
+# 🪆 Matryoshka
 Run linux natively on your campus iMac with only one command.
 
 ### Reasons to use this tool
