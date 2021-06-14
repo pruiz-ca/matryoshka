@@ -11,19 +11,17 @@
 #                                                                              #
 # **************************************************************************** #
 
-source ~/.zshrc
-
-if [[ "$(docker images -q $(whoami)/valgrind 2> /dev/null)" == "" ]]; then
+if [[ "$(docker images -q valgrind-img 2> /dev/null)" == "" ]]; then
 	cd ~/.valgrind
-	docker build -t $(whoami)/valgrind .
+	docker build -t valgrind-img .
 	cd $OLDPWD
 fi
 
-if [ ! "$(docker ps -q -f name=$(whoami)-valgrind)" ]; then
-    if [ "$(docker ps -aq -f status=exited -f name=$(whoami)-valgrind)" ]; then
-        docker rm $(whoami)-valgrind
+if [ ! "$(docker ps -q -f name=valgrind42)" ]; then
+    if [ "$(docker ps -aq -f status=exited -f name=valgrind42)" ]; then
+        docker rm valgrind42
     fi
-    docker run -d -it -v `pwd`:/valgrind/ --name $USER-valgrind $(whoami)/valgrind
+    docker run -d -it -v $PWD:/valgrind/ --name valgrind42 valgrind-img
 fi
 
-docker exec -it $USER-valgrind zsh
+docker exec -it valgrind42 zsh

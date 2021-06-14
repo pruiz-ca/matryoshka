@@ -75,7 +75,7 @@ printf %s "$GREEN"
 cat <<'EOF'
 Valgrind42 has been installed!
 Now you can run "valgrind" in the directory you want to use as root to start valgrind.
-You can also delete all docker related files with "dockerclean".
+You can also delete all docker related files with the command "dockerclean".
 Cheers!
 EOF
 printf %s "$RESET"
