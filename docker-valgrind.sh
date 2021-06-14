@@ -11,6 +11,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+docker ps -q &> /dev/null || sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexandregv/42toolbox/master/init_docker.sh)"
+
 if [[ "$(docker images -q valgrind-img 2> /dev/null)" == "" ]]; then
 	cd ~/.valgrind
 	docker build -t valgrind-img .
