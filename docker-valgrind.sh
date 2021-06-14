@@ -11,9 +11,12 @@
 #                                                                              #
 # **************************************************************************** #
 
+echo "Starting docker.."
 docker ps -q &> /dev/null || sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexandregv/42toolbox/master/init_docker.sh)"
+docker ps -q &> /dev/null || sleep 30
+echo "Docker started"
 
-if [[ "$(docker images -q valgrind-img 2> /dev/null)" == "" ]]; then
+if [ "$(docker images -q valgrind-img 2> /dev/null)" == "" ]; then
 	cd ~/.valgrind
 	docker build -t valgrind-img .
 	cd $OLDPWD
