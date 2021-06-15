@@ -14,10 +14,8 @@
 [ -z "${USER}" ] && export USER=$(whoami)
 
 echo "Starting docker.."
-if [ ! -d "/goinfre/$USER/docker" ]; then
-    docker ps -q &> /dev/null || sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexandregv/42toolbox/master/init_docker.sh)"
-    docker ps -q &> /dev/null || sleep 35
-fi
+docker ps -q &> /dev/null || sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexandregv/42toolbox/master/init_docker.sh)"
+docker ps -q &> /dev/null || sleep 35
 echo "Docker started"
 
 if [ "$(docker images -q matryoshka-img 2> /dev/null)" == "" ]; then
