@@ -11,7 +11,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-INSTALL_PATH=${INSTALL_PATH:-~/.valgrind}
+INSTALL_PATH=${INSTALL_PATH:-~/.matryoshka}
 REPO=${REPO:-pruiz-ca/Valgrind42}
 REMOTE=${REMOTE:-https://github.com/${REPO}.git}
 BRANCH=${BRANCH:-main}
@@ -21,10 +21,10 @@ command -v "$@" >/dev/null 2>&1
 }
 
 append_aliases(){
-LINE="alias valgrind='~/.valgrind/docker-valgrind.sh'"
+LINE="alias matryoshka='~/.matryoshka/matryoshka.sh'"
 grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
 
-LINE="alias dockerclean='~/.valgrind/docker-clean.sh'"
+LINE="alias dockerclean='~/.matryoshka/docker-clean.sh'"
 grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
 }
 
@@ -47,7 +47,7 @@ fi
 }
 
 setup_valgrind42() {
-echo "${BLUE}Installing Valgrind42...${RESET}"
+echo "${BLUE}Installing Matryoshka...${RESET}"
 
 command_exists git || {
 fmt_error "git is not installed"
@@ -59,7 +59,7 @@ git clone -c core.eol=lf -c core.autocrlf=false \
 -c fetch.fsck.zeroPaddedFilemode=ignore \
 -c receive.fsck.zeroPaddedFilemode=ignore \
 --depth=1 --branch "$BRANCH" "$REMOTE" "$INSTALL_PATH" || {
-fmt_error "git clone of valgrind42 repo failed"
+fmt_error "git clone of matryoshka repo failed"
 exit 1
 }
 echo
@@ -73,13 +73,12 @@ append_aliases
 
 printf %s "$GREEN"
 cat <<'EOF'
-Valgrind42 has been installed!
-Now you can run "valgrind" in the directory you want to use as root to start valgrind.
-You can also delete all docker related files with the command "dockerclean".
+Matryoshka has been installed!
+Now you can run "matryoshka" in the directory you want to use as root to enter linux.
+You can also delete ALL docker related files with the command "dockerclean".
 Cheers!
 EOF
 printf %s "$RESET"
 }
 
 main "$@"
-

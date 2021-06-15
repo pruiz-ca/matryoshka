@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-LABEL description="Valgrind"
+LABEL description="Matryoshka"
 
 ENV TZ=Europe/Madrid
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -41,4 +41,4 @@ RUN make
 # COPY /minilibx-linux/mlx.h /usr/local/include/
 # COPY /minilibx-linux/man/man3/mlx*.3 /usr/local/man/man3/
 
-WORKDIR /valgrind
+WORKDIR /macos
