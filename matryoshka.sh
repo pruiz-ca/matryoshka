@@ -11,10 +11,19 @@
 #                                                                              #
 # **************************************************************************** #
 
+[ -z "${USER}" ] && export USER=$(whoami)
+
+echo "Starting docker.."
+if [ ! -d "/goinfre/$USER/docker" ]; then
+    docker ps -q &> /dev/null || sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexandregv/42toolbox/master/init_docker.sh)"
+    docker ps -q &> /dev/null || sleep 35
+fi
+echo "Docker started"
+
 if [ "$(docker images -q matryoshka-img 2> /dev/null)" == "" ]; then
-	cd ~/.matryoshka
-	docker build -t matryoshka-img .
-	cd $OLDPWD
+    cd ~/.matryoshka
+    docker build -t matryoshka-img .
+    cd $OLDPWD
 fi
 
 if [ ! "$(docker ps -q -f name=matryoshka)" ]; then
