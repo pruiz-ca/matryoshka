@@ -8,4 +8,4 @@ Run linux natively on your iMac using only one command. Made for 42 Madrid iMacs
 
 This tool has been made to help 42 students run linux easily on MacOS.
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/pruiz-ca/Valgrind42/main/install.sh)"
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/pruiz-ca/Matryoshka/main/install.sh)"
