@@ -1,6 +1,7 @@
 # 🪆 Matryoshka
 Image made to help 42 students run linux natively on MacOS using only one command.
-- Made for 42 iMacs -
+
+\- Made for 42 iMacs \-
 
 ### Features
  - Valgrind
