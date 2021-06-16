@@ -9,11 +9,11 @@ Image made to help 42 students run linux natively on MacOS using only one comman
  - Ohmyzsh! with spaceship theme
  - gcc, clang, nasm, lldb
  - vim
+ - Runs docker on goinfre thanks to https://github.com/alexandregv/42toolbox
 
-### Reasons to use this tool
+### Why use this?
  - You want to run Valgrind easily
  - To test projects on linux
- - Runs docker on goinfre thanks to https://github.com/alexandregv/42toolbox
 
 ### How to install
 Run this command on your terminal:
