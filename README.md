@@ -1,25 +1,36 @@
 # 🪆 Matryoshka
-Image made to help 42 students run linux natively on MacOS using only one command.
+Autoinstall and run a Linux environment on your Mac with one command in less than 45 secs.
 
-\- Made for 42 iMacs \-
+I'm starting ft_transcendence and Docker does not work anymore on 42 Madrid, so this image has been made as a workaround to get docker running painlessly.
 
-### Features
- - Valgrind
- - Norminette v3
- - Ohmyzsh! with spaceship theme
- - gcc, clang, nasm, lldb
- - vim
- - Runs docker on goinfre thanks to https://github.com/alexandregv/42toolbox
+### Installation
+- Install VirtualBox
+- Run this command on your terminal:
 
-### Why use this?
- - You want to run Valgrind easily
- - To test projects on linux
-
-### How to install
-Run this command on your terminal:
-    
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/pruiz-ca/Matryoshka/main/install.sh)"
 
-### How to use
- - Run 'matryoshka' to open a linux terminal using your current directory as root.
- - Run 'dockerclean' to remove all docker related info (including other containers).
+### Usage
+After installing, reload your terminal and run ```matryohska``` to see what commands are available.
+
+Available commands:
+ - ```run```: starts matryoshka
+ - ```stop```: stops the VM running in the background
+ - ```clean```: removes ONLY the VM files, not matryoshka
+ - ```update```: updates matryoshka
+ - ```reset```: same as performing ```clean && run```
+ - ```uninstall```: removes ALL associated files (matryoshka and VM)
+
+### Features
+ - From 0 to Linux with one command and 45 seconds.
+ - Mounts your Mac home automatically and cd to your current directory. Files are shared so everything you modify through this linux VM will affect your real files in real time and viceversa.
+ - Uses goinfre if using it in 42, otherwise uses VBox default folder
+ - Edit which packages you want to install by default
+ - Autoexpands the VM disk to your desired partition size. If you are in 42 the default size is 20gb, if not 8gb.
+ - Uses Alpine Linux because of its low weight
+ - Defaults ssh to localhost port 42
+
+### Why use this?
+ - You need a linux environment to try your projects
+ - fsanitize on linux
+ - valgrind
+ - Can't use docker on your campus

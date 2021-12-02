@@ -1,84 +1,68 @@
 #!/bin/bash
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    install.sh                                         :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pruiz-ca <pruiz-ca@student.42madrid.co>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/13 17:48:48 by pruiz-ca          #+#    #+#              #
-#    Updated: 2021/06/13 17:48:48 by pruiz-ca         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-INSTALL_PATH=${INSTALL_PATH:-~/.matryoshka}
-REPO=${REPO:-pruiz-ca/Valgrind42}
-REMOTE=${REMOTE:-https://github.com/${REPO}.git}
-BRANCH=${BRANCH:-main}
+source matryoshka.sh
 
-command_exists() {
-command -v "$@" >/dev/null 2>&1
+INSTALL_PATH=~/.matryoshka
+REPO=pruiz-ca/matryoshka
+REMOTE=https://github.com/$REPO.git
+BRANCH=main
+
+function error() {
+	echo -e $RED$1$NOCOLOR
+	exit 1
 }
 
-append_aliases(){
-LINE="alias matryoshka='~/.matryoshka/matryoshka.sh'"
-grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
-
-LINE="alias dockerclean='~/.matryoshka/docker-clean.sh'"
-grep -qF -- "$LINE" "/Users/$(whoami)/.zshrc" || echo "$LINE" >> "/Users/$(whoami)/.zshrc"
+function check_git_is_installed() {
+	command -v git > /dev/null 2>&1 || error "git is not installed :(("
 }
 
-setup_color() {
-if [ -t 1 ]; then
-RED=$(printf '\033[31m')
-GREEN=$(printf '\033[32m')
-YELLOW=$(printf '\033[33m')
-BLUE=$(printf '\033[34m')
-BOLD=$(printf '\033[1m')
-RESET=$(printf '\033[m')
-else
-RED=""
-GREEN=""
-YELLOW=""
-BLUE=""
-BOLD=""
-RESET=""
-fi
+function clone_repository() {
+	rm -rf ~/.matryoshka
+	git clone "$REMOTE" "$INSTALL_PATH" > /dev/null 2>&1 || error "> git clone of matryoshka repo failed :("
+	echo -en $NOCOLOR
 }
 
-setup_valgrind42() {
-echo "${BLUE}Installing Matryoshka...${RESET}"
-
-command_exists git || {
-fmt_error "git is not installed"
-exit 1
+function append_aliases() {
+	alias_matryoshka="alias matryoshka='"$INSTALL_PATH/matryoshka.sh""\'
+	sed -i _bak "/matryoshka.sh/d" ~/.zshrc
+	echo "$alias_matryoshka" >> ~/.zshrc
 }
 
-git clone -c core.eol=lf -c core.autocrlf=false \
--c fsck.zeroPaddedFilemode=ignore \
--c fetch.fsck.zeroPaddedFilemode=ignore \
--c receive.fsck.zeroPaddedFilemode=ignore \
---depth=1 --branch "$BRANCH" "$REMOTE" "$INSTALL_PATH" || {
-fmt_error "git clone of matryoshka repo failed"
-exit 1
-}
-echo
-}
+function create_config_file() {
+	touch ~/.matryoshkarc
+	cat << EOF > ~/.matryoshkarc
+#####
+# ADDITIONAL PACKAGES TO INSTALL - Space separated values
+# Preinstalled: nano zsh ohmyzsh python3 curl ncdu git
+#
+# Example: PACKAGES="vim make clang g++ valgrind docker docker-compose"
+#####
+PACKAGES="bash vim"
 
-main()
-{
-setup_color
-setup_valgrind42
-append_aliases
 
-printf %s "$GREEN"
-cat <<'EOF'
-Matryoshka has been installed!
-Now you can run "matryoshka" in the directory you want to use as root to enter linux.
-You can also delete ALL docker related files with the command "dockerclean".
-Cheers!
+# Change to "true" if you need norminette to be installed
+NORMINETTE=false
+
+#####
+# PARTITION SIZE - in MB
+# - PART_42IMAC -> partition size to be used if matryoshka is run on a 42 iMac
+# - PART_ELSEWHERE -> partition size to be used in other computers
+#####
+SIZE_42IMAC=20480
+SIZE_ELSEWHERE=8192
 EOF
-printf %s "$RESET"
 }
 
-main "$@"
+function success_message() {
+	echo -e $GREEN"Matryoshka has been installed!"
+	echo -e $BLUE"Now reload your terminal to apply changes and run$YELLOW matryoshka$BLUE. Cheers!"
+	echo -en $NOCOLOR
+}
+
+if [[ $0 == $BASH_SOURCE ]]; then
+	check_git_is_installed
+	clone_repository
+	append_aliases
+	create_config_file
+	success_message
+fi

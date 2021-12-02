@@ -1,34 +1,30 @@
 #!/bin/bash
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    matryoshka.sh                                      :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: pruiz-ca <pruiz-ca@student.42madrid.co>    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/06/14 18:42:03 by pruiz-ca          #+#    #+#              #
-#    Updated: 2021/06/14 18:42:15 by pruiz-ca         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-[ -z "${USER}" ] && export USER=$(whoami)
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;36m'
+NOCOLOR='\033[0m'
 
-echo "Starting docker.."
-docker ps -q &> /dev/null || sh -c "$(curl -fsSL https://raw.githubusercontent.com/alexandregv/42toolbox/master/init_docker.sh)"
-docker ps -q &> /dev/null || sleep 35
-echo "Docker started"
+function error() {
+	echo -e $RED$1$NOCOLOR
+	exit 1
+}
 
-if [ "$(docker images -q matryoshka-img 2> /dev/null)" == "" ]; then
-    cd ~/.matryoshka
-    docker build -t matryoshka-img .
-    cd $OLDPWD
+function check_vbox_is_installed() {
+	command -v VBoxManage > /dev/null 2>&1 || error "Virtual Box is not installed :(("
+}
+
+function usage_help() {
+	echo -e $BLUE"Usage:$YELLOW matryoshka <action>"
+	echo -e $BLUE"<action> can be: run | stop | clean | update | reset | uninstall"$NOCOLOR
+}
+
+if [[ $0 == $BASH_SOURCE ]]; then
+	check_vbox_is_installed
+	if [[ -f ./scripts/$1.sh ]]; then
+		./scripts/$1.sh
+		exit 0
+	fi
+	usage_help
 fi
-
-if [ ! "$(docker ps -q -f name=matryoshka)" ]; then
-    if [ "$(docker ps -aq -f status=exited -f name=matryoshka)" ]; then
-        docker rm matryoshka
-    fi
-    docker run -d -it -v $PWD:/macos/ --name matryoshka matryoshka-img
-fi
-
-docker exec -it matryoshka zsh
