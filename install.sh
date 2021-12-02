@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo hola
-
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[0;33m'
@@ -65,8 +63,12 @@ function success_message() {
 	echo -en $NOCOLOR
 }
 
-check_git_is_installed
-clone_repository
-append_aliases
-create_config_file
-success_message
+main() {
+	check_git_is_installed
+	clone_repository
+	append_aliases
+	create_config_file
+	success_message
+}
+
+main "$@"
