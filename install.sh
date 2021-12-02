@@ -1,6 +1,10 @@
 #!/bin/bash
 
-source matryoshka.sh
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[0;33m'
+BLUE='\033[0;36m'
+NOCOLOR='\033[0m'
 
 INSTALL_PATH=~/.matryoshka
 REPO=pruiz-ca/matryoshka
@@ -59,10 +63,8 @@ function success_message() {
 	echo -en $NOCOLOR
 }
 
-if [[ $0 == $BASH_SOURCE ]]; then
-	check_git_is_installed
-	clone_repository
-	append_aliases
-	create_config_file
-	success_message
-fi
+check_git_is_installed
+clone_repository
+append_aliases
+create_config_file
+success_message
