@@ -6,10 +6,15 @@ YELLOW='\033[0;33m'
 BLUE='\033[0;36m'
 NOCOLOR='\033[0m'
 
-INSTALL_PATH=~/.matryoshka
-REPO=pruiz-ca/matryoshka
-REMOTE=https://github.com/$REPO.git
-BRANCH=installfix
+INSTALL_PATH=${INSTALL_PATH:-~/.matryoshka}
+REPO=${REPO:-pruiz-ca/Matryoshka}
+REMOTE=${REMOTE:-https://github.com/${REPO}.git}
+BRANCH=${BRANCH:-installfix}
+
+# INSTALL_PATH=~/.matryoshka
+# REPO=pruiz-ca/matryoshka
+# REMOTE=https://github.com/$REPO.git
+# BRANCH=installfix
 
 function error() {
 	echo -e $RED$1$NOCOLOR
