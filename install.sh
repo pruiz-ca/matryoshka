@@ -9,7 +9,7 @@ NOCOLOR='\033[0m'
 INSTALL_PATH=~/.matryoshka
 REPO=pruiz-ca/matryoshka
 REMOTE=https://github.com/$REPO.git
-BRANCH=main
+BRANCH=installfix
 
 function error() {
 	echo -e $RED$1$NOCOLOR
