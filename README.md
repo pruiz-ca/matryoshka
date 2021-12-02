@@ -7,7 +7,7 @@ I'm starting ft_transcendence and Docker does not work anymore on 42 Madrid, so 
 - Install VirtualBox
 - Run this command on your terminal:
 
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/pruiz-ca/Matryoshka/main/install.sh)"
+    bash -c "$(curl -fsSL https://raw.githubusercontent.com/pruiz-ca/matryoshka/main/install.sh)"
 
 ### Usage
 After installing, reload your terminal and run ```matryohska``` to see what commands are available.
