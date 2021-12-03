@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./scripts/clean.sh && ./scripts/run.sh
+~/.matryoshka/scripts/clean.sh && ~/.matryoshka/scripts/run.sh

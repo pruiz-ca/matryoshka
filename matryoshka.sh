@@ -22,8 +22,8 @@ function usage_help() {
 
 if [[ $0 == $BASH_SOURCE ]]; then
 	check_vbox_is_installed
-	if [[ -f ./scripts/$1.sh ]]; then
-		./scripts/$1.sh
+	if [[ -f ~/.matryoshka/scripts/$1.sh ]]; then
+		~/.matryoshka/scripts/$1.sh
 		exit 0
 	fi
 	usage_help

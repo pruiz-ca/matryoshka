@@ -1,5 +1,5 @@
 #!/bin/bash
-source scripts/run.sh
+source ~/.matryoshka/scripts/run.sh
 
 VBoxManage controlvm $VM_NAME acpipowerbutton > /dev/null 2>&1
 
