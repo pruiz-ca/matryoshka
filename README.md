@@ -13,7 +13,6 @@ I'm starting ft_transcendence and Docker does not work anymore on 42 Madrid, so 
 
 ### Usage
 After installing, reload your terminal and run ```matryohska``` to see what commands are available.
-
 Available commands:
  - ```run```: starts matryoshka
  - ```stop```: stops the VM running in the background
@@ -21,6 +20,12 @@ Available commands:
  - ```update```: updates matryoshka
  - ```reset```: same as performing ```clean && run```
  - ```uninstall```: removes ALL associated files (matryoshka and VM)
+
+### Tweak
+You can change some settings editting ```~/.matryoshkarc```. There are some commentary but right now you can change:
+ - ```PACKAGES```: all your packages to be installed when run for the first time. Separated by spaces.
+ - ```NORMINETTE```: true if you want norminette to be installed or false otherwise.
+ - ```PARTITION SIZE```: there are two editable values. Partition size if you are in 42 iMacs or partition size if you are on another computer. The VM is installed in ```/goinfre```so you can afford to make it bigger than your needs.
 
 ### Features
  - From 0 to Linux with one command and 45 seconds.
